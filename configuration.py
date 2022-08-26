@@ -5,17 +5,21 @@ import yaml
 
 def percent_to_absolute(color_value):
     """Convert from percent (0.0 - 1.0) to absolute value (0 - 255)"""
+    if color_value < 0.0 or color_value > 1.0:
+        raise Exception('color value must be between 0 and 1')
     return int(color_value*255)
 
 class Configuration():
     def __init__(self, config_data):
         config = None
         try:
+            if config_data is None:
+                raise Exception('config file is not readable')
             config = yaml.safe_load(config_data)
         except yaml.YAMLError as yaml_exception:
             raise Exception('unable to parse config file: ' + str(yaml_exception)) from yaml_exception
 
-        if 'size' not in config:
+        if config is None or 'size' not in config:
             raise Exception('the config file is missing the screen size')
         if 'width' not in config['size']:
             raise Exception('the config file is missing the screen width')
