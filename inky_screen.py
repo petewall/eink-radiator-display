@@ -5,6 +5,7 @@ from screen import Screen
 class InkyScreen(Screen):
     def __init__(self, palette):
         physical_screen = auto()
+
         super().__init__(physical_screen.resolution, palette)
         self.hardware = physical_screen
 

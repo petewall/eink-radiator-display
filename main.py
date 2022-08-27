@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # pylint: disable=no-value-for-parameter
 
-from os import read
-import readline
 import click
 from PIL import Image
 from configuration import Configuration
@@ -14,7 +12,7 @@ def cli():
 
 @cli.command()
 def version():
-    with open('./version', 'r') as version_file:
+    with open('./version', 'r', encoding="utf-8") as version_file:
         print(version_file.readline().strip())
 
 @cli.command()
