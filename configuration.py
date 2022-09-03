@@ -3,6 +3,14 @@
 from colour import Color
 import yaml
 
+def make_palette(colors):
+    palette = ()
+    for color in colors:
+        palette += Color(color).rgb
+    palette += (0, 0, 0) * (256 - len(colors))
+    palette = tuple(map(percent_to_absolute, palette))
+    return palette
+
 def percent_to_absolute(color_value):
     """Convert from percent (0.0 - 1.0) to absolute value (0 - 255)"""
     if color_value < 0.0 or color_value > 1.0:
@@ -36,9 +44,4 @@ class Configuration():
 
     def palette(self):
         """Get the palette from the list of colors"""
-        palette = ()
-        for color in self.colors:
-            palette += Color(color).rgb
-        palette += (0, 0, 0) * (256 - len(self.colors))
-        palette = tuple(map(percent_to_absolute, palette))
-        return palette
+        return make_palette(self.colors)

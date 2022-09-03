@@ -1,28 +1,9 @@
-# pylint: disable=protected-access
-
 from time import sleep
 
 from PIL import Image
 
-def quantize(image, palette):
-    """Convert an RGB or L mode image to use a given P image's palette."""
-    # From https://stackoverflow.com/a/29438149/1255644
-
-    image.load()
-    palette.load()
-    if palette.mode != 'P':
-        raise ValueError('bad mode for palette image')
-    if image.mode not in ['RGB', 'L']:
-        raise ValueError('only RGB or L mode images can be quantized to a palette')
-    converted_image = image.im.convert('P', 0, palette.im)  # the 0 means turn OFF dithering
-
-    return image._new(converted_image)
-
-
 class Screen():
-    def __init__(self, size, palette):
-        self.image = None
-        self.size = size
+    def __init__(self, palette):
         self.palette = palette
 
     def set_image(self, image: Image):
@@ -34,10 +15,9 @@ class Screen():
         if image.mode == 'RGB':
             palette = Image.new('P', (16, 16))
             palette.putpalette(self.palette)
-            image = quantize(image, palette)
+            image = image.quantize(palette=palette, dither=0)
 
-        self.image = image
-        self.show_image()
+        self.show_image(image)
 
-    def show_image(self):
+    def show_image(self, _):
         sleep(0)
