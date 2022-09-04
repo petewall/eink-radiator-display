@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-# pylint: disable=no-value-for-parameter
+# pylint: disable=no-value-for-parameter,import-outside-toplevel
 
+import os
 import click
 from PIL import Image
 from configuration import Configuration
@@ -16,12 +17,16 @@ def version():
         print(version_file.readline().strip())
 
 @cli.command()
-@click.option('--config', type=click.File('r'), required=True, help='Config file for the screen')
+@click.option('--config', type=click.File('r'), required=False, help='Config file for the screen')
 @click.argument('image', required=True)
 def display(config, image):
     """ Display an image on the screen """
-    config = Configuration(config)
-    screen = Screen(config.palette())
+    if os.environ.get('EINK_SCREEN_PRESENT'):
+        from inky_screen import InkyScreen
+        screen = InkyScreen()
+    else:
+        config = Configuration(config)
+        screen = Screen(config.palette())
     screen.set_image(Image.open(image))
 
 if __name__ == '__main__':
