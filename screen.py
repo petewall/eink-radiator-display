@@ -3,10 +3,12 @@ from time import sleep
 from PIL import Image
 
 class Screen():
-    def __init__(self, palette):
+    def __init__(self, height, width, palette):
+        self.height = height
+        self.width = width
         self.palette = palette
 
-    def set_image(self, image: Image):
+    def set_color_palette(self, image: Image):
         if image.mode == 'RGBA':
             background = Image.new('RGB', image.size, 'white')
             background.paste(image, mask=image.split()[3])
@@ -17,6 +19,14 @@ class Screen():
             palette.putpalette(self.palette)
             image = image.quantize(palette=palette, dither=0)
 
+        return image
+
+    def set_size(self, image: Image):
+        return image.resize((self.height, self.width), resample=Image.LANCZOS)
+
+    def set_image(self, image: Image):
+        image = self.set_color_palette(image)
+        image = self.set_size(image)
         self.show_image(image)
 
     def show_image(self, _):

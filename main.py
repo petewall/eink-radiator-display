@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # pylint: disable=no-value-for-parameter,import-outside-toplevel
 
-import os
 import click
 from PIL import Image
-from configuration import Configuration
-from screen import Screen
+from inky_screen import InkyScreen
 
 @click.group()
 def cli():
@@ -17,16 +15,12 @@ def version():
         print(version_file.readline().strip())
 
 @cli.command()
-@click.option('--config', type=click.File('r'), required=False, help='Config file for the screen')
+# @click.option('--screen-type', type=click.File('t'), required=False, help='Type of the Inky screen ')
+# @click.option('--screen-color', type=click.File('c'), required=False, help='Color of the Inky screen ')
 @click.argument('image', required=True)
-def display(config, image):
+def display(image):
     """ Display an image on the screen """
-    if os.environ.get('EINK_SCREEN_PRESENT'):
-        from inky_screen import InkyScreen
-        screen = InkyScreen()
-    else:
-        config = Configuration(config)
-        screen = Screen(config.palette())
+    screen = InkyScreen("what", "red")
     screen.set_image(Image.open(image))
 
 if __name__ == '__main__':

@@ -5,13 +5,12 @@ from hamcrest import assert_that, is_
 
 from PIL import Image
 
-from configuration import make_palette
+from palette import make_palette
 from screen import Screen
 
 class ScreenTest(unittest.TestCase):
     def test_set_image_quantizes_wrb(self):
-        palette = make_palette(['white', 'red', 'black'])
-        screen = Screen(palette)
+        screen = Screen(400, 300, make_palette(['white', 'red', 'black']))
         screen.show_image = MagicMock()
 
         with Image.open('test/pencils.jpg') as image:
@@ -23,8 +22,7 @@ class ScreenTest(unittest.TestCase):
                 assert_that(quantized, is_(the_same_image_as(expected)))
 
     def test_set_image_quantizes_wrbgb(self):
-        palette = make_palette(['white', 'red', 'black', 'green', 'blue'])
-        screen = Screen(palette)
+        screen = Screen(400, 300, make_palette(['white', 'red', 'black', 'green', 'blue']))
         screen.show_image = MagicMock()
 
         with Image.open('test/pencils.jpg') as image:
@@ -36,8 +34,7 @@ class ScreenTest(unittest.TestCase):
                 assert_that(quantized, is_(the_same_image_as(expected)))
 
     def test_set_image_flattens_transparent_images(self):
-        palette = make_palette(['white', 'red', 'black', 'green', 'blue'])
-        screen = Screen(palette)
+        screen = Screen(400, 300, make_palette(['white', 'red', 'black', 'green', 'blue']))
         screen.show_image = MagicMock()
 
         with Image.open('test/mango.png') as image:
