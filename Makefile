@@ -10,7 +10,7 @@ Pipfile.lock: Pipfile
 
 temp/make-targets/deps: Pipfile.lock
 ifndef HAS_PIPENV
-	$(error "pipenv is required")
+	pip install pipenv
 endif
 	pipenv sync --dev
 	mkdir -p temp/make-targets
