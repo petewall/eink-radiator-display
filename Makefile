@@ -31,3 +31,8 @@ lint: temp/make-targets/deps
 	pipenv run pylint \
 		--disable line-too-long,missing-module-docstring,missing-class-docstring,missing-function-docstring\
 		*.py
+
+requirements.txt: Pipfile Pipfile.lock
+	pipenv requirements > requirements.txt
+	echo 'inky' >> requirements.txt
+	echo 'rpi.gpio' >> requirements.txt
