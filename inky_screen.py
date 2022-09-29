@@ -1,7 +1,11 @@
 from PIL import Image
-from inky import auto, InkyWHAT
 from palette import make_palette
 from screen import Screen
+
+try:
+    from inky import auto, InkyWHAT
+except ModuleNotFoundError:
+    from mock_inky import auto, InkyWHAT
 
 class InkyScreen(Screen):
     def __init__(self, screen_type, color):
