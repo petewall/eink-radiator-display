@@ -21,12 +21,8 @@ class Screen():
 
         return image
 
-    def set_size(self, image: Image):
-        return image.resize((self.height, self.width), resample=Image.LANCZOS)
-
     def set_image(self, image: Image):
         image = self.set_color_palette(image)
-        image = self.set_size(image)
         self.show_image(image)
 
     def show_image(self, _):
