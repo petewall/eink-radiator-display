@@ -1,3 +1,4 @@
+from PIL import Image
 from inky import auto, InkyWHAT
 from palette import make_palette
 from screen import Screen
@@ -14,6 +15,6 @@ class InkyScreen(Screen):
         super().__init__(physical_screen.HEIGHT, physical_screen.WIDTH, palette)
         self.hardware = physical_screen
 
-    def show_image(self, image):
+    def show_image(self, image: Image):
         self.hardware.set_image(image)
         self.hardware.show()

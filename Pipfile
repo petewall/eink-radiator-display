@@ -12,8 +12,8 @@ pyyaml = "*"
 Pillow = "*"
 click = "*"
 colour = "*"
-inky = {version = "*", markers="'raspi' in platform_release"}
-"rpi.gpio" = {version = "*", markers="'raspi' in platform_release"}
+#inky = "*"
+#"rpi.gpio" = "*"
 pyyaml = "*"
 
 [requires]
