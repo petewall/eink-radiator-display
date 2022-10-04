@@ -2,11 +2,14 @@ from time import sleep
 
 from PIL import Image
 
+from palette import make_palette
+
 class Screen():
-    def __init__(self, height, width, palette):
+    def __init__(self, height, width, colors):
         self.height = height
         self.width = width
-        self.palette = palette
+        self.colors = colors
+        self.palette = make_palette(colors)
 
     def set_color_palette(self, image: Image):
         if image.mode == 'RGBA':

@@ -1,5 +1,4 @@
 from PIL import Image
-from palette import make_palette
 from screen import Screen
 
 try:
@@ -11,12 +10,12 @@ class InkyScreen(Screen):
     def __init__(self, screen_type, color):
         if screen_type == "what":
             physical_screen = InkyWHAT(color)
-            palette = make_palette(['black', 'white', color])
+            colors = ['black', 'white', color]
         else:
             physical_screen = auto()
-            palette = make_palette([])
+            colors = ['black', 'white']
 
-        super().__init__(physical_screen.HEIGHT, physical_screen.WIDTH, palette)
+        super().__init__(physical_screen.HEIGHT, physical_screen.WIDTH, colors)
         self.hardware = physical_screen
 
     def show_image(self, image: Image):
