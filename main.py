@@ -5,6 +5,7 @@ import json
 import click
 from PIL import Image
 from inky_screen import InkyScreen
+from version import version_number
 
 screen = InkyScreen("what", "red")
 
@@ -14,8 +15,7 @@ def cli():
 
 @cli.command()
 def version():
-    with open('./version', 'r', encoding='utf-8') as version_file:
-        print(version_file.readline().strip())
+    print(version_number)
 
 @cli.command()
 def config():

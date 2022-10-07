@@ -18,12 +18,11 @@ endif
 
 deps: temp/make-targets/deps
 
+build: # no-op
+
 TEST_SOURCES := $(shell find $$PWD -name '*_test.py')
 test-units: $(TEST_SOURCES) deps
 	pipenv run python -m unittest $(TEST_SOURCES)
-
-# test-features: deps
-# 	pipenv run behave
 
 test: lint test-units
 
@@ -36,3 +35,6 @@ requirements.txt: Pipfile Pipfile.lock
 	pipenv requirements > requirements.txt
 	echo 'inky' >> requirements.txt
 	echo 'rpi.gpio' >> requirements.txt
+
+version.py:
+	echo "version_number = \"$$(cat version)\"" > version.py
