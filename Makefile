@@ -20,16 +20,22 @@ deps: temp/make-targets/deps
 
 build: # no-op
 
+ALL_PYTHON_SOURCES := $(shell find $$PWD -name '*.py')
+
+lint: $(ALL_PYTHON_SOURCES) deps
+	pipenv run pylint \
+		--disable line-too-long,missing-module-docstring,missing-class-docstring,missing-function-docstring\
+		$(ALL_PYTHON_SOURCES)
+
 TEST_SOURCES := $(shell find $$PWD -name '*_test.py')
 test-units: $(TEST_SOURCES) deps
 	pipenv run python -m unittest $(TEST_SOURCES)
 
-test: lint test-units
+FEATURE_SOURCES := $(shell find features -type f)
+test-features: $(FEATURE_SOURCES) deps
+	pipenv run behave
 
-lint: temp/make-targets/deps
-	pipenv run pylint \
-		--disable line-too-long,missing-module-docstring,missing-class-docstring,missing-function-docstring\
-		*.py
+test: lint test-units test-features
 
 requirements.txt: Pipfile Pipfile.lock
 	pipenv requirements > requirements.txt
