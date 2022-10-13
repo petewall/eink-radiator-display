@@ -4,7 +4,7 @@ from hamcrest import assert_that, is_
 
 from PIL import Image
 
-from screen import Screen
+from screen.screen import Screen
 
 class ScreenTest(unittest.TestCase):
     def test_set_color_palette_quantizes_wrb(self):

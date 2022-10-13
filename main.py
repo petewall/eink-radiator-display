@@ -2,12 +2,14 @@
 # pylint: disable=no-value-for-parameter,import-outside-toplevel
 
 import json
+import os
 import click
 from PIL import Image
-from inky_screen import InkyScreen
+from screen.picker import new_screen
 from version import version_number
 
-screen = InkyScreen("what", "red")
+screen_type = os.getenv("EINK_RADIATOR_SCREEN_TYPE", default="inkywhat-red")
+screen = new_screen(screen_type)
 
 @click.group()
 def cli():
@@ -15,10 +17,12 @@ def cli():
 
 @cli.command()
 def version():
+    """ Print the version of this utility """
     print(version_number)
 
 @cli.command()
 def config():
+    """ Print the screen configuration """
     print(json.dumps({
         "size": {
             "height": screen.height,

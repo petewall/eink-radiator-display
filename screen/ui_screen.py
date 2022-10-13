@@ -1,5 +1,5 @@
 from PIL import Image
-from screen import Screen
+from screen.screen import Screen
 
 class UIScreen(Screen):
     def __init__(self):
