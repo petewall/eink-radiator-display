@@ -6,7 +6,7 @@ from hamcrest import assert_that, equal_to, is_
 
 @when('running the version command')
 def step_impl(context):
-    context.process = subprocess.run(["./main.py", "version"], capture_output=True, text=True)
+    context.process = subprocess.run(["pipenv", "run", "python", "main.py", "version"], capture_output=True, text=True)
 
 @then('command completes successfully')
 def step_impl(context):

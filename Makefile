@@ -35,9 +35,9 @@ test-units: $(TEST_SOURCES) deps
 
 FEATURE_SOURCES := $(shell find features -type f)
 test-features: $(FEATURE_SOURCES) deps
-	pipenv run behave
+	PIPENV_VERBOSITY=-1 pipenv run behave
 
-test: lint test-units test-features
+test: test-units test-features
 
 requirements.txt: Pipfile Pipfile.lock
 	pipenv requirements > requirements.txt
