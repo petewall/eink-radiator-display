@@ -20,6 +20,8 @@ deps: temp/make-targets/deps
 
 build: # no-op
 
+build-all: # no-op
+
 ALL_PYTHON_SOURCES := $(shell find $$PWD -name '*.py')
 
 lint: $(ALL_PYTHON_SOURCES) deps
