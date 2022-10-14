@@ -4,7 +4,7 @@ from screen.screen import Screen
 try:
     from inky import auto, InkyWHAT
 except ModuleNotFoundError:
-    from screen.mock_inky import auto, InkyWHAT
+    from mock_inky import auto, InkyWHAT
 
 class InkyScreen(Screen):
     def __init__(self, screen_type, color):

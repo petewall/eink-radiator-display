@@ -1,9 +1,7 @@
 import unittest
 from test.pillow_image_matcher import the_same_image_as
 from hamcrest import assert_that, is_
-
 from PIL import Image
-
 from screen.screen import Screen
 
 class ScreenTest(unittest.TestCase):
