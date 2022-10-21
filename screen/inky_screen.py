@@ -11,12 +11,14 @@ class InkyScreen(Screen):
     def __init__(self, screen_type, color):
         if screen_type == "what":
             physical_screen = InkyWHAT(color)
+            kind = "Inky wHAT " + color
             colors = ['black', 'white', color]
         else:
             physical_screen = auto()
+            kind = "Inky something"
             colors = ['black', 'white']
 
-        super().__init__(physical_screen.HEIGHT, physical_screen.WIDTH, colors)
+        super().__init__(kind, physical_screen.HEIGHT, physical_screen.WIDTH, colors)
         self.hardware = physical_screen
 
     def show_image(self, image: Image):
