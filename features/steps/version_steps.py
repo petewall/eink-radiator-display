@@ -10,4 +10,5 @@ def step_impl(context):
 
 @then('the version number is printed')
 def step_impl(context):
-    assert_that(str(context.process.stdout), is_(equal_to("0.0.0\n")))
+    with open("version", encoding="utf-8") as version:
+        assert_that(str(context.process.stdout), is_(equal_to(version.readline() + "\n")))

@@ -6,7 +6,7 @@ import os
 import click
 from PIL import Image
 from screen.picker import new_screen
-from version import version_number
+from version import VERSION_NUMBER
 
 screen_type = os.getenv("EINK_RADIATOR_SCREEN_TYPE", default="inkywhat-red")
 screen = new_screen(screen_type)
@@ -18,7 +18,7 @@ def cli():
 @cli.command()
 def version():
     """ Print the version of this utility """
-    print(version_number)
+    print(VERSION_NUMBER)
 
 @cli.command()
 def config():

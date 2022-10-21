@@ -41,4 +41,4 @@ requirements.txt: Pipfile Pipfile.lock
 	echo 'rpi.gpio' >> requirements.txt
 
 version.py:
-	echo "version_number = \"$$(cat version)\"" > version.py
+	echo "VERSION_NUMBER = \"$$(cat version)\"" > version.py
