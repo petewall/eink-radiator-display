@@ -1,4 +1,5 @@
 .PHONY: deps lint test test-units
+MAKEFILE := $(lastword $(MAKEFILE_LIST))
 
 clean:
 	rm -rf temp
@@ -30,7 +31,9 @@ test-units: $(TEST_SOURCES) deps
 	pipenv run python -m unittest $(TEST_SOURCES)
 
 FEATURE_SOURCES := $(shell find features -type f)
-test-features: $(FEATURE_SOURCES) deps
+test-features: $(FEATURE_SOURCES) deps version.py
+	touch version
+	@$(MAKE) -f $(MAKEFILE) version.py   # Ensure that the version files match
 	PIPENV_VERBOSITY=-1 pipenv run behave
 
 test: test-units test-features
@@ -40,5 +43,5 @@ requirements.txt: Pipfile Pipfile.lock
 	echo 'inky' >> requirements.txt
 	echo 'rpi.gpio' >> requirements.txt
 
-version.py:
+version.py: version
 	echo "VERSION_NUMBER = \"$$(cat version)\"" > version.py
