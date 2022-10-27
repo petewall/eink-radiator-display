@@ -1,6 +1,9 @@
+"""Functions for creating color palettes"""
+
 from colour import Color
 
 def make_palette(colors):
+    """Make a color palette from a list of colors"""
     palette = ()
     for color in colors:
         palette += Color(color).rgb

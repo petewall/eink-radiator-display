@@ -1,4 +1,6 @@
-# pylint: disable=function-redefined,subprocess-run-check
+# pylint: disable=function-redefined,missing-function-docstring,subprocess-run-check
+
+"""Steps shared among multiple commands"""
 
 import os
 from behave import given, then # pylint: disable=no-name-in-module

@@ -23,7 +23,8 @@ ALL_PYTHON_SOURCES := $(shell find $$PWD -name '*.py')
 
 lint: $(ALL_PYTHON_SOURCES) deps
 	pipenv run pylint \
-		--disable line-too-long,missing-module-docstring,missing-class-docstring,missing-function-docstring\
+		--load-plugins pylint_quotes \
+		--disable line-too-long \
 		$(ALL_PYTHON_SOURCES)
 
 TEST_SOURCES := $(shell find $$PWD -name '*_test.py')
@@ -44,4 +45,5 @@ requirements.txt: Pipfile Pipfile.lock
 	echo 'rpi.gpio' >> requirements.txt
 
 version.py: version
-	echo "VERSION_NUMBER = \"$$(cat version)\"" > version.py
+	echo "\"\"\"The version number\"\"\"" > version.py
+	echo "VERSION_NUMBER = '$$(cat version)'" >> version.py

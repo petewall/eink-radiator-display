@@ -1,3 +1,5 @@
+"""Screen tests"""
+
 import os
 import unittest
 from unittest.mock import MagicMock
@@ -7,8 +9,11 @@ from PIL import Image
 from screen.screen import Screen
 
 class ScreenTest(unittest.TestCase):
+    """Screen tests"""
+
     def test_set_color_palette_quantizes_wrb(self):
-        screen = Screen("Test Screen", 400, 300, ['white', 'red', 'black'])
+        """Tests quantizing an image with wrb palette"""
+        screen = Screen('Test Screen', 400, 300, ['white', 'red', 'black'])
 
         with Image.open('test/pencils.jpg') as image:
             quantized = screen.set_color_palette(image)
@@ -17,7 +22,8 @@ class ScreenTest(unittest.TestCase):
                 assert_that(quantized, is_(the_same_image_as(expected)))
 
     def test_set_color_palette_quantizes_wrbgb(self):
-        screen = Screen("Test Screen", 400, 300, ["black", "white", "red", "green", "blue"])
+        """Tests quantizing an image with wrbgb palette"""
+        screen = Screen('Test Screen', 400, 300, ['black', 'white', 'red', 'green', 'blue'])
 
         with Image.open('test/pencils.jpg') as image:
             quantized = screen.set_color_palette(image)
@@ -26,7 +32,8 @@ class ScreenTest(unittest.TestCase):
                 assert_that(quantized, is_(the_same_image_as(expected)))
 
     def test_set_color_palette_flattens_transparent_images(self):
-        screen = Screen("Test Screen", 400, 300, ["black", "white", "red", "green", "blue"])
+        """Tests quantizing a transparent image will flatten the image"""
+        screen = Screen('Test Screen', 400, 300, ['black', 'white', 'red', 'green', 'blue'])
 
         with Image.open('test/mango.png') as image:
             quantized = screen.set_color_palette(image)
@@ -35,7 +42,8 @@ class ScreenTest(unittest.TestCase):
                 assert_that(quantized, is_(the_same_image_as(expected)))
 
     def test_set_image(self):
-        screen = Screen("Test Screen", 400, 300, ["black", "white", "red", "green", "blue"])
+        """Tests setting an image"""
+        screen = Screen('Test Screen', 400, 300, ['black', 'white', 'red', 'green', 'blue'])
         screen.show_image = MagicMock()
 
         with Image.open('test/pencils.jpg') as image:
@@ -48,8 +56,9 @@ class ScreenTest(unittest.TestCase):
                 assert_that(quantized, is_(the_same_image_as(expected)))
 
     def test_set_image_with_output_file(self):
-        screen = Screen("Test Screen", 400, 300, ["black", "white", "red", "green", "blue"])
-        screen.set_output_file("output.png")
+        """Tests that setting an image with an output file will save the quantized image to that file"""
+        screen = Screen('Test Screen', 400, 300, ['black', 'white', 'red', 'green', 'blue'])
+        screen.set_output_file('output.png')
         screen.show_image = MagicMock()
 
         with Image.open('test/pencils.jpg') as image:

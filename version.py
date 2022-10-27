@@ -1,1 +1,2 @@
-VERSION_NUMBER = "0.1.1"
+"""The version number"""
+VERSION_NUMBER = '0.1.3'
