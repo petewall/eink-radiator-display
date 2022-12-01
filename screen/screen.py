@@ -25,7 +25,7 @@ class Screen():
         if image.mode == 'RGB':
             palette = Image.new('P', (16, 16))
             palette.putpalette(self.palette)
-            image = image.quantize(palette=palette, dither=0)
+            image = image.quantize(palette=palette, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.FLOYDSTEINBERG)
 
         return image
 

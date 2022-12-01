@@ -17,7 +17,8 @@ class ScreenTest(unittest.TestCase):
 
         with Image.open('test/pencils.jpg') as image:
             quantized = screen.set_color_palette(image)
-            # quantized.save('test/pencils_wrb.png')
+            if os.getenv('GENERATE_TEST_ARTIFACTS') is not None:
+                quantized.save('test/pencils_wrb.png')
             with Image.open('test/pencils_wrb.png') as expected:
                 assert_that(quantized, is_(the_same_image_as(expected)))
 
@@ -27,7 +28,8 @@ class ScreenTest(unittest.TestCase):
 
         with Image.open('test/pencils.jpg') as image:
             quantized = screen.set_color_palette(image)
-            # quantized.save('test/pencils_bwrgb.png')
+            if os.getenv('GENERATE_TEST_ARTIFACTS') is not None:
+                quantized.save('test/pencils_bwrgb.png')
             with Image.open('test/pencils_bwrgb.png') as expected:
                 assert_that(quantized, is_(the_same_image_as(expected)))
 
@@ -37,7 +39,8 @@ class ScreenTest(unittest.TestCase):
 
         with Image.open('test/mango.png') as image:
             quantized = screen.set_color_palette(image)
-            # quantized.save('test/mango_bwrgb.png')
+            if os.getenv('GENERATE_TEST_ARTIFACTS') is not None:
+                quantized.save('test/mango_bwrgb.png')
             with Image.open('test/mango_bwrgb.png') as expected:
                 assert_that(quantized, is_(the_same_image_as(expected)))
 

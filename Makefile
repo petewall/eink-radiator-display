@@ -39,6 +39,9 @@ test-features: $(FEATURE_SOURCES) deps version.py
 
 test: test-units test-features
 
+generate-test-artifacts:
+	GENERATE_TEST_ARTIFACTS=true $(MAKE) test
+
 requirements.txt: Pipfile Pipfile.lock
 	pipenv requirements > requirements.txt
 	echo 'inky' >> requirements.txt
