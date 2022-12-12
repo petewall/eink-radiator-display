@@ -50,3 +50,8 @@ requirements.txt: Pipfile Pipfile.lock
 version.py: version
 	echo "\"\"\"The version number\"\"\"" > version.py
 	echo "VERSION_NUMBER = '$$(cat version)'" >> version.py
+
+dist/main:
+	pyinstaller --onefile main.py
+
+build: dist/main
