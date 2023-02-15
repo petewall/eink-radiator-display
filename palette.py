@@ -14,5 +14,5 @@ def make_palette(colors):
 def percent_to_absolute(color_value):
     """Convert from percent (0.0 - 1.0) to absolute value (0 - 255)"""
     if color_value < 0.0 or color_value > 1.0:
-        raise Exception('color value must be between 0 and 1')
+        raise ValueError('color value must be between 0 and 1')
     return int(color_value*255)

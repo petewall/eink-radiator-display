@@ -38,8 +38,8 @@ class PercentToAbsoluteTest(unittest.TestCase):
 
     def test_negative(self):
         """Tests that values below zero raise exceptions"""
-        assert_that(calling(percent_to_absolute).with_args(-1.0), raises(Exception, 'color value must be between 0 and 1'))
+        assert_that(calling(percent_to_absolute).with_args(-1.0), raises(ValueError, 'color value must be between 0 and 1'))
 
     def test_over_one(self):
         """Tests that values greater than one raise exceptions"""
-        assert_that(calling(percent_to_absolute).with_args(2.0), raises(Exception, 'color value must be between 0 and 1'))
+        assert_that(calling(percent_to_absolute).with_args(2.0), raises(ValueError, 'color value must be between 0 and 1'))
