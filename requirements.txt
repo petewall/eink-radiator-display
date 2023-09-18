@@ -8,5 +8,5 @@
 -i https://pypi.org/simple/
 click==8.1.4
 colour==0.1.5
-pillow==10.0.0
+pillow==10.0.1
 pyyaml==6.0
